@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Disclosure | $NOIDCAT</title>
-<meta name="description" content="$NOIDCAT disclosure: every wallet, the buy plan, the market-making policy and the sell ladder, published before the token exists.">
+<meta name="description" content="$NOIDCAT disclosure: the dev wallet, the lock, the buy plan and the sell ladder, published before the token exists.">
 <meta name="theme-color" content="#000000">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://noidcat.com/disclosure.html">
@@ -14,12 +14,12 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<a class="skip" href="#wallets">Skip to content</a>
+<a class="skip" href="#wallet">Skip to content</a>
 
 <header class="nav">
   <a class="brand" href="/"><img src="assets/logo.webp" alt="" width="32" height="32"><span class="lbl">$NOIDCAT</span></a>
   <nav aria-label="Sections">
-    <a href="/">Home</a><a href="whitepaper.html">Whitepaper</a><a href="#wallets">Wallets</a><a href="#plan">Buy plan</a><a href="#exit">Sell ladder</a>
+    <a href="/">Home</a><a href="whitepaper.html">Whitepaper</a><a href="#wallet">Dev wallet</a><a href="#plan">Buy plan</a><a href="#exit">Sell ladder</a>
   </nav>
 </header>
 
@@ -27,55 +27,46 @@
   <h1>Disclosure</h1>
   <p class="meta">Published before the token exists &middot; v2</p>
 
-  <p class="lead">Nothing here is a promise about price. It is a list of the wallets the team controls, what each one is allowed to do, and the rules the automation follows — written down before launch so there is nothing to guess at afterwards.</p>
+  <p class="lead">Nothing here is a promise about price. It is the dev wallet's job, the terms it is held to, and the rules the automation follows — written down before launch so there is nothing to guess at afterwards.</p>
 
-  <p class="note"><strong>Read this first.</strong> Parano1d v2.1 has no lock contracts and no vesting. Nothing below is enforced by code. What makes it checkable is that every address is public from the creation block and every rule was published in advance. If a rule changes, the change is posted here and on <a href="https://x.com/no1dcat" target="_blank" rel="noopener">@no1dcat</a> before it takes effect.</p>
+  <p class="note"><strong>Read this first.</strong> Parano1d v2.1 has no vesting primitive, so the lock below is not a contract — it is the published behaviour of a script, and any trade that would break it is visible on chain. If a rule changes, the change is posted here and on <a href="https://x.com/no1dcat" target="_blank" rel="noopener">@no1dcat</a> before it takes effect.</p>
 
   <nav class="toc" aria-label="Contents">
     <strong>Contents</strong>
     <ol>
-      <li><a href="#wallets">Wallet list</a></li>
-      <li><a href="#plan">Buy plan and market making</a></li>
-      <li><a href="#exit">Sell ladder</a></li>
+      <li><a href="#wallet">The dev wallet</a></li>
+      <li><a href="#plan">Buy plan</a></li>
+      <li><a href="#exit">Sell ladder and lock</a></li>
       <li><a href="#honest">What this is not</a></li>
     </ol>
   </nav>
 
-  <h2 id="wallets">1. Wallet list</h2>
-  <p>Every wallet the team uses is listed below with its job. All of them derive from one seed held on one self-hosted node. They are separate addresses so each role is visible on its own rather than folded into a single opaque creator wallet.</p>
-
-  <h3>Dev &mdash; creates the token, holds the team bag</h3>
-  <p>Pays the 500 NOID holder backing, executes the 25,000 token creation buy, and accumulates toward the team target. This is the only wallet that ever sells into the ladder.</p>
+  <h2 id="wallet">1. The dev wallet</h2>
+  <p>One wallet creates the token, holds the team bag and pays for the build: hosting, art, liquidity and the launch itself. It is the only wallet the team trades from, and it is published here so the lock can be checked rather than trusted.</p>
   <div class="copyrow"><code data-copy>o10zz7h75swlpe2v2anpdrj5zvkrvedyvkulfr8mm6we8amn3q2k9sdjj2f2</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
 
-  <h3>Six small wallets</h3>
-  <p>Funded from the dev wallet, these trade small amounts on the public curve. Same seed, separate addresses, so the activity can be followed one wallet at a time.</p>
-  <div class="copyrow"><code data-copy>o17hfku3n0q0lgkya4z9jd229z6mky9acpynxck5lj4udltyex8a6sa2452r</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
-  <div class="copyrow"><code data-copy>o1acy95grvuql6kkpj84yx2l5xz5wwlg866u5wws0z5g7g34aelsaqxjrz6p</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
-  <div class="copyrow"><code data-copy>o1hygn6ssvku6tl3xgu2z9yztlykj2wvhcfh537t3pcycn3gx9lfdsxtxud0</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
-  <div class="copyrow"><code data-copy>o1u8z9tqk456g37l0gkturcz43n5ddme073x24ugxkufxrn6ly835s5rulwj</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
-  <div class="copyrow"><code data-copy>o1rzdgavlhdytlysny50v7land0klumpeflvutevuarerppcsea93q58dute</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
-  <div class="copyrow"><code data-copy>o1fu8k4350qh85uesy7sd9a3qsck3uye40ysqcn04fjaa9ff5z96xsn47k3j</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
-
-  <h3>Personal &mdash; not part of the plan</h3>
-  <p>Drew's own NOID. It can move at any time and is not counted in any figure on this page.</p>
-  <div class="copyrow"><code data-copy>o1wmazrn6qhcgvcj6xn3xvsc5neps46cjx33szg7a8adju0uznmr2s0k3cye</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
+  <h3>Locked until 2&times; the launch price</h3>
+  <p>No token the team holds can reach the curve below <strong>twice the average price it was bought at</strong>. The bag sits still while the chart finds its level, and the first sale is only possible once the price has doubled. From there it unlocks in steps — never all at once — and a quarter of it stays locked through graduation.</p>
+  <ul>
+    <li><strong>Nothing sells below 2&times; average cost.</strong> Nobody buying the chart is bidding against the team's own exit.</li>
+    <li><strong>Maximum 8% of the bag per unlock</strong>, at least 120 blocks apart.</li>
+    <li><strong>25% stays locked through graduation</strong>, into the permanent DEX pool.</li>
+  </ul>
 
   <h2 id="plan">2. Buy plan</h2>
-  <p>The token is created at the first block where v2.1 native operations are live, block <strong>279,370</strong>, with a creation buy in the same transaction. There is no multi-wallet bundle in the creation block: one wallet, one transaction, one address in the block.</p>
+  <p>The token is created at the first block where v2.1 native operations are live, block <strong>279,370</strong>, with a creation buy in the same transaction. One wallet, one transaction, one address in the block.</p>
 
   <ul>
     <li><strong>Creation buy: 25,000 tokens</strong> (5% of supply), paid at curve price, about 90 NOID. This sets the opening price and starts the chart.</li>
     <li><strong>Team target: 100,000 tokens</strong> (20% of supply), reached by accumulation on the public curve over the first hours — not in one block.</li>
     <li><strong>Hard cap: 22%.</strong> Past that, the dev wallet stops buying regardless of price.</li>
-    <li><strong>Six wallets trade from the confirmation block onward.</strong> Small buys, short holds, most of the position sold back into the curve and never below its own entry price. It keeps the early chart moving instead of one address talking to itself.</li>
-    <li><strong>Demand following.</strong> If the price moves more than 1.5% in a block without a team buy in it, the dev wallet buys within the next block instead of waiting its turn. Real buying is never allowed to outrun the accumulation.</li>
+    <li><strong>Bought in clips, not one sweep.</strong> The dev wallet takes small slices across the first hours instead of a single order parked on the curve.</li>
   </ul>
 
-  <p class="note">Early hours on a chart are mostly the people who built it, and this launch is no exception. What is fixed in advance is the ceiling: the team never holds more than 22%, sells only above its own average cost, and every address doing it sits on this page.</p>
+  <p class="note">Early hours on a chart are mostly the people who built it, and this launch is no exception. What is fixed in advance is the ceiling and the exit: the team never holds more than 22%, and never sells below twice its own cost.</p>
 
-  <h2 id="exit">3. Sell ladder</h2>
-  <p>The dev wallet is the only seller, and it sells on a fixed ladder measured against its own average entry price. Nothing is sold below that average.</p>
+  <h2 id="exit">3. Sell ladder and lock</h2>
+  <p>The dev wallet is the only seller, and it sells on a fixed ladder measured against its own average entry price. Nothing is sold below that average, and nothing at all below twice it.</p>
   <table>
     <thead><tr><th>Rung</th><th>Trigger</th><th>Size</th></tr></thead>
     <tbody>
@@ -89,14 +80,14 @@
     <li><strong>Spacing:</strong> at least 120 blocks between rungs, so a single candle cannot trigger two sales.</li>
     <li><strong>Floor:</strong> the dev wallet keeps at least 25% of the bag through graduation and into the DEX pool.</li>
     <li><strong>Path:</strong> every sale goes through the public curve or pool at the same price everyone else sees. No off-market transfers to buyers.</li>
-    <li><strong>Sells are not hidden.</strong> The bag sits in a disclosed address; anyone can watch it move.</li>
+    <li><strong>Sells are not hidden.</strong> The bag sits in a public address; anyone can watch it move.</li>
   </ul>
 
   <h2 id="honest">4. What this is not</h2>
   <ul>
-    <li>Not enforced by vesting. The ladder is the declared behaviour of a script, not a contract lock.</li>
-    <li>Not a presale and not an allowlist. There is no allocation to buy and no wallet that gets in early.</li>
-    <li>Not a treasury or a roadmap. There is no marketing wallet denominated in anything, and the team allocation exists to pay for hosting, art and liquidity.</li>
+    <li>Not enforced by a vesting contract. Parano1d v2.1 has none. The lock is script behaviour, published before launch — break it and it shows.</li>
+    <li>Not a presale and not an allowlist. There is no allocation to buy and nobody gets in early.</li>
+    <li>Not a treasury or a roadmap. The dev allocation pays for hosting, art and liquidity, not a team salary.</li>
     <li>Not a claim about price. At launch prices the whole team bag is worth about a hundred dollars. Everything above that is whatever buyers decide.</li>
   </ul>
 

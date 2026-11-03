@@ -111,10 +111,10 @@
   </table>
   <p>Team tokens are not free tokens. They are bought at curve price with NOID the team spent, and they dilute nobody because supply is fixed. 22% is the ceiling; it is reached only if the price stays below the accumulation ceiling while the bag fills.</p>
 
-  <h2 id="market">8. Trading and exit policy</h2>
-  <p>Two mechanisms run from the confirmation block. Both are published here and enforced by script, not by discretion at two in the morning.</p>
-  <h3>Six trading wallets</h3>
-  <p>Six published addresses trade small positions on their own timing and sizes, each selling back above its own entry price, so the cycle ratchets rather than bleeds. The point is a chart that is alive from the first hour on a venue with no order book and, at launch, no audience.</p>
+  <h2 id="market">8. Trading, lock and exit</h2>
+  <p>Everything the dev wallet does after confirmation is scripted and published, not decided at two in the morning.</p>
+  <h3>The lock</h3>
+  <p>The team bag cannot be sold below twice its own average entry price. Below that the bag is inert — the price can fall and the only seller stays out of the way. Selling begins at 2&times; cost, in 8% clips at least 120 blocks apart, and 25% is held through graduation into the pool. Parano1d v2.1 has no vesting primitive, so this is script behaviour rather than a contract, and any break in it is visible on a public address.</p>
   <h3>Demand following</h3>
   <p>When a block moves the price more than 150 basis points without a team buy in it, the dev wallet buys in the following block. The accumulation is not allowed to be outrun by real flow: if buyers arrive, the bag fills faster and the price is defended by our own participation rather than by hope.</p>
   <h3>Exit</h3>
@@ -124,9 +124,9 @@
   <p>What can go wrong, stated plainly:</p>
   <ul>
     <li><strong>Liquidity is thin until graduation.</strong> 2,000 NOID is the entire curve. A 20 NOID sell moves price several percent. Position sizes matter more here than on a deep venue.</li>
-    <li><strong>The team trades early.</strong> Early candles are mostly ours, so read the first hours as a starting price rather than a crowd.</li>
+    <li><strong>The team trades early.</strong> Early candles are mostly the dev wallet's, so read the first hours as a starting price rather than a crowd.</li>
     <li><strong>Graduation is not permanent liquidity magic.</strong> The pool can be drained by sellers; the 40% becomes the only depth.</li>
-    <li><strong>No vesting and no lock.</strong> The ladder is declared behaviour. A compromised key or a changed rule breaks it, and the only recourse is the published address list.</li>
+    <li><strong>The lock is not a contract.</strong> Parano1d v2.1 has no vesting primitive. The 2&times; floor is script behaviour; a compromised key or a changed rule breaks it and the recourse is that the address is public.</li>
     <li><strong>Backing is small.</strong> 500 NOID, about a hundred and forty dollars at current prices, covers a collapse and nothing else.</li>
     <li><strong>Chain risk.</strong> Native assets are five weeks old at launch. Consensus bugs, RPC quirks and wallet tooling are all live risks in a way that a decade-old chain's are not.</li>
     <li><strong>Meme risk.</strong> There is no cash flow, no product and no claim on anything. If nobody laughs, the price is the backing and no more.</li>
@@ -138,7 +138,7 @@
     <li>The metadata hash is committed on chain — read the token record and hash the JSON behind this site yourself.</li>
     <li>Backing, supply and the absence of a mint are consensus rules of <code class="mono">create_token</code>, not policy.</li>
     <li>Curve cash follows the formula above; the wallet preview exposes the exact debit, fee and quoted output before any signature.</li>
-    <li>Every team address is on the disclosure page and every trade from them is a public transaction on a public chain.</li>
+    <li>The dev address is published in the disclosure and every trade from it is a public transaction on a public chain.</li>
   </ul>
 
   <hr>
