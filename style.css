@@ -117,3 +117,62 @@ h3{margin:0 0 6px;font-size:19px;font-weight:800}
   .gallery{grid-template-columns:repeat(3,1fr)}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ---------- mobile-first additions ---------- */
+/* nav: scrollable chips on small screens, no dead space */
+@media (max-width:899px){
+  .nav nav{display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;flex:1;justify-content:flex-end}
+  .nav nav::-webkit-scrollbar{display:none}
+  .nav nav a{white-space:nowrap;font-size:14px;padding:9px 2px;display:inline-block}
+  .brand span.lbl{display:none}
+}
+@media (max-width:639px){
+  body{font-size:16px}
+  .section{padding:56px 18px}
+  .hero{padding:32px 18px 44px;min-height:auto}
+  .alloc,.stats{grid-template-columns:1fr}
+  .stats{gap:8px}
+  .stat{padding:14px 16px}
+  .card{padding:16px}
+  .pct{font-size:30px}
+  .nav{padding:10px 14px}
+  .cta{flex-direction:column;width:100%;max-width:340px}
+  .btn{width:100%;justify-content:center}
+  .steps{gap:18px}
+  h2{font-size:clamp(26px,8vw,34px)}
+  h1{letter-spacing:-1px}
+  .footer{padding:36px 18px}
+  blockquote{margin:0}
+}
+
+/* addresses must never blow out the viewport */
+.addr,.addr code,code.mono,.copyrow code,.doc code{overflow-wrap:anywhere;word-break:break-word}
+.addr code{display:inline-block;max-width:100%}
+.copyrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px}
+.copyrow code{flex:1 1 100%;order:2;font-size:12px;line-height:1.5;padding:8px 10px;border-radius:8px;
+background:#04130a;color:#b8f5c8;border:1px solid #143f22}
+.copybtn{order:1;flex:none;font:inherit;font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;
+padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:#0a0f0a;color:var(--g);cursor:pointer}
+.copybtn:hover{background:#11200f;border-color:#1f4a26}
+.copybtn.ok{background:var(--g);color:#000;border-color:var(--g)}
+
+/* long-form document styling (whitepaper, disclosure) */
+.doc{max-width:760px;margin:0 auto;padding:48px 20px 80px}
+.doc h1{font-size:clamp(32px,8vw,48px);letter-spacing:-1px;margin:0 0 8px;color:#fff}
+.doc .meta{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:1px;margin:0 0 28px}
+.doc h2{margin:44px 0 12px;font-size:clamp(22px,5.4vw,30px)}
+.doc h3{margin:26px 0 8px;font-size:17px}
+.doc p,.doc li{color:#c9cfc9;font-size:16px;line-height:1.72}
+.doc ul,.doc ol{padding-left:22px}
+.doc li{margin:0 0 8px}
+.doc .toc{border:1px solid var(--line);border-radius:12px;padding:14px 18px;background:#040604;margin:0 0 34px}
+.doc .toc ol{margin:6px 0 0}
+.doc .toc a{font-weight:700;font-size:14px}
+.doc .fml{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:#04130a;border:1px solid #143f22;
+border-radius:8px;padding:12px 14px;overflow-x:auto;color:#b8f5c8;margin:12px 0}
+.doc table{width:100%;border-collapse:collapse;font-size:14px;margin:14px 0;display:block;overflow-x:auto}
+.doc th,.doc td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+.doc th{color:var(--g);font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+.doc .note{border-left:3px solid var(--g);padding:2px 0 2px 14px;color:#dcdcdc;margin:18px 0}
+.doc hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+.signoff{color:var(--g);font-weight:800;letter-spacing:1px}

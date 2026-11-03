@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Whitepaper | $NOIDCAT</title>
+<meta name="description" content="$NOIDCAT whitepaper: a native token on Parano1d v2.1 — curve mechanics, backing, graduation, allocation and market policy, with the maths written out.">
+<meta name="theme-color" content="#000000">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://noidcat.com/whitepaper.html">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#abstract">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="/"><img src="assets/logo.webp" alt="" width="32" height="32"><span class="lbl">$NOIDCAT</span></a>
+  <nav aria-label="Sections">
+    <a href="/">Home</a><a href="disclosure.html">Disclosure</a><a href="#curve">Curve</a><a href="#market">Market policy</a><a href="#risk">Risks</a>
+  </nav>
+</header>
+
+<main class="doc">
+  <h1>NOIDCAT</h1>
+  <p class="meta">Whitepaper &middot; v1 &middot; November 2026 &middot; a native asset on Parano1d</p>
+
+  <p class="lead">A fixed-supply meme token issued through the protocol's own launch primitive, on a chain where the issue is verifiable rather than declared. This document is the mechanics. The wallet list and the trading rules are in the <a href="disclosure.html">disclosure</a>.</p>
+
+  <nav class="toc" aria-label="Contents">
+    <strong>Contents</strong>
+    <ol>
+      <li><a href="#abstract">Abstract</a></li>
+      <li><a href="#chain">The chain</a></li>
+      <li><a href="#primitive">The launch primitive</a></li>
+      <li><a href="#curve">Curve mathematics</a></li>
+      <li><a href="#backing">Backing and redemption</a></li>
+      <li><a href="#graduation">Graduation and the pool</a></li>
+      <li><a href="#allocation">Allocation</a></li>
+      <li><a href="#market">Market policy</a></li>
+      <li><a href="#risk">Risk and threat model</a></li>
+      <li><a href="#verify">How to verify all of this</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="abstract">1. Abstract</h2>
+  <p>NOIDCAT is a 500,000 supply native token created at Parano1d mainnet block 279,370, the activation height of the v2.1 native asset rules. It launches through the chain's built-in launch curve, with no presale, no allowlist, no private round, and no mint authority.</p>
+  <p>The interesting claim is not the cat. It is that a meme token here inherits properties that normally require a contract, an audit and trust in a team: fixed supply enforced by consensus, holder backing redeemable by burn, a public curve with published formulas, and a graduation path into a permanent pool. None of it is a smart contract. It is protocol behaviour, identical for every token launched the same way.</p>
+
+  <h2 id="chain">2. The chain</h2>
+  <p>Parano1d is a proof-native, post-quantum proof-of-work L1. Blocks target 30 seconds. Addresses are bech32m with an <code class="mono">o1</code> prefix. NOID has six decimal places and is denominated in micronoid (<code class="mono">1 NOID = 1,000,000 &#956;NOID</code>); every amount in the RPC surface, this document and the tooling is an integer count of micronoid.</p>
+  <p>v2.1 introduced native assets: tokens, collections and markets executed by consensus rather than by deployed bytecode. Native operations open at height <strong>279,370</strong>. Below that height every preview fails with a deterministic error, which is why nothing can be pre-signed or bundled early.</p>
+
+  <h2 id="primitive">3. The launch primitive</h2>
+  <p>Creation is a single call, <code class="mono">create_token</code>, taking a supply, a metadata hash and an optional initial buy. Creation and the initial buy confirm atomically in one transaction — either both land or neither does. There is no window between the token existing and the first purchase in which another party can act.</p>
+  <ul>
+    <li><strong>Minimum supply</strong> 100,000 whole tokens. Maximum 10,248,191,152.</li>
+    <li><strong>Metadata</strong> is a 32-byte hash committed on chain. The document behind it is immutable for the life of the token, which is why the image and description are finalised before creation rather than after.</li>
+    <li><strong>No mint authority.</strong> The supply is fixed at creation. There is no later issuance and no creator withdrawal of holder backing.</li>
+    <li><strong>Initial buy</strong> executes at the same curve price as any public buy, with no discount and no reserved allocation.</li>
+  </ul>
+
+  <h2 id="curve">4. Curve mathematics</h2>
+  <p>60% of supply (<code class="mono">C = 300,000</code> tokens) is sold on a linear bonding curve. The remaining 40% never touches the curve and becomes permanent pool liquidity at graduation.</p>
+  <p>Price is linear in tokens sold. It opens at one third of a thousandth of a NOID and reaches graduation price exactly when the curve allocation is exhausted:</p>
+  <p class="fml">p(q) = p&#8320; + k&#183;q,&#160;&#160;&#160;p&#8320; = 1/300 NOID,&#160;&#160;p(C) = 0.01 NOID,&#160;&#160;k = (p&#8321; &minus; p&#8320;) / C</p>
+  <p>Buying <code class="mono">q</code> tokens along the curve costs the integral of price over that span, the area under the line:</p>
+  <p class="fml">cash(q) = p&#8320;&#183;q + k&#183;q&#178;/2</p>
+  <p>A sell of the same <code class="mono">q</code> tokens returns <code class="mono">cash(q&#8320;) &minus; cash(q&#8320; &minus; q)</code> — the exact inverse. Two consequences follow, and both matter:</p>
+  <ul>
+    <li><strong>Curve trades carry no market fee.</strong> The 0.3% fee exists only on the DEX after graduation. A round trip on the curve costs only the network fee.</li>
+    <li><strong>Curve trades are path-independent in price terms.</strong> Buying and immediately selling back returns the curve to its prior state, so two-sided volume does not decay the price by itself.</li>
+  </ul>
+  <p>Cost to move the curve, from an empty curve:</p>
+  <table>
+    <thead><tr><th>Tokens bought</th><th>% of supply</th><th>Cost (NOID)</th><th>Price after</th></tr></thead>
+    <tbody>
+      <tr><td>25,000</td><td>5.0%</td><td>90.3</td><td>0.00389</td></tr>
+      <tr><td>40,000</td><td>8.0%</td><td>151.1</td><td>0.00422</td></tr>
+      <tr><td>100,000</td><td>20.0%</td><td>444.4</td><td>0.00556</td></tr>
+      <tr><td>300,000</td><td>60.0%</td><td>2,000.0</td><td>0.01000</td></tr>
+    </tbody>
+  </table>
+  <p>The whole curve allocation is only 2,000 NOID of buying. That number is the reason the token can be exhausted cheaply and the reason the allocation policy below exists.</p>
+
+  <h2 id="backing">5. Backing and redemption</h2>
+  <p>Every whole token carries a backing claim of 0.001 NOID, deposited by the creator at a total of <strong>500 NOID</strong> for 500,000 tokens. Backing is attached to the token, not to an address: it travels with transfers and is claimable by whoever holds it.</p>
+  <p><code class="mono">burn_token</code> destroys tokens and pays out their share of backing in the same transaction. Redemption is therefore always available and always proportional, and the creator cannot front-run it or withdraw the pool.</p>
+  <p>Backing is a floor, not a guarantee of value. 500 NOID is roughly what the token costs to exhaust at the very bottom of the curve, so backing sits below the curve's opening price — it protects the downside of a total collapse, not a normal drawdown.</p>
+
+  <h2 id="graduation">6. Graduation and the pool</h2>
+  <p>When the curve allocation is exhausted — 2,000 NOID of curve cash for this supply — the asset graduates automatically. The remaining 200,000 tokens and the curve proceeds form a permanent NOID pool. Balances and identities are unchanged; the venue changes from curve to DEX.</p>
+  <ul>
+    <li>DEX trades charge 0.3% of input, rounded to a base unit, plus the network fee.</li>
+    <li>Automatic price tolerance is 10%. A caller can set their own minimum output; unspent inputs are released and an unfilled policy pays no fee.</li>
+    <li>Several trades can execute in one block, each against the state the previous one left. A fill always receives at least its authorised minimum.</li>
+    <li>Graduation is not a listing and not an announcement. It is a state transition.</li>
+  </ul>
+
+  <h2 id="allocation">7. Allocation</h2>
+  <table>
+    <thead><tr><th>Bucket</th><th>Tokens</th><th>%</th><th>Mechanism</th></tr></thead>
+    <tbody>
+      <tr><td>Public curve</td><td>300,000</td><td>60%</td><td>Open from the first block</td></tr>
+      <tr><td>Permanent pool</td><td>200,000</td><td>40%</td><td>Locked by consensus at graduation</td></tr>
+      <tr><td>Team, creation buy</td><td>25,000</td><td>5%</td><td>Bought at curve price in the creation transaction</td></tr>
+      <tr><td>Team, accumulation</td><td>up to 75,000</td><td>15%</td><td>Bought on the open curve after launch, hard cap 22% total</td></tr>
+    </tbody>
+  </table>
+  <p>Team tokens are not free tokens. They are bought at curve price with NOID the team spent, and they dilute nobody because supply is fixed. 22% is the ceiling; it is reached only if the price stays below the accumulation ceiling while the bag fills.</p>
+
+  <h2 id="market">8. Market policy</h2>
+  <p>Two mechanisms run from the confirmation block. Both are published here and enforced by script, not by discretion at two in the morning.</p>
+  <h3>Two-sided market making</h3>
+  <p>Six disclosed addresses cycle small positions against each other with independent timing, size ranges and hold windows. Each position sells back into the curve above its own entry price, so the cycle is a ratchet rather than a subsidy. The purpose is a live tape on a venue with no order book and, at launch, no audience.</p>
+  <h3>Demand following</h3>
+  <p>When a block moves the price more than 150 basis points without a team buy in it, the dev wallet buys in the following block. The accumulation is not allowed to be outrun by real flow: if buyers arrive, the bag fills faster and the price is defended by our own participation rather than by hope.</p>
+  <h3>Exit</h3>
+  <p>The dev wallet sells on a ladder at 2&times;, 3&times;, 5&times; and 8&times; its own average entry, 8% of the bag per rung, at least 120 blocks apart, never below average entry, and keeps at least 25% through graduation. Full detail in the <a href="disclosure.html#exit">disclosure</a>.</p>
+
+  <h2 id="risk">9. Risk and threat model</h2>
+  <p>What can go wrong, stated plainly:</p>
+  <ul>
+    <li><strong>Liquidity is thin until graduation.</strong> 2,000 NOID is the entire curve. A 20 NOID sell moves price several percent. Position sizes matter more here than on a deep venue.</li>
+    <li><strong>The team is the early market.</strong> Early candles are mostly ours. A reader who assumes organic discovery on day one is being flattered.</li>
+    <li><strong>Graduation is not permanent liquidity magic.</strong> The pool can be drained by sellers; the 40% becomes the only depth.</li>
+    <li><strong>No vesting and no lock.</strong> The ladder is declared behaviour. A compromised key or a changed rule breaks it, and the only recourse is the published address list.</li>
+    <li><strong>Backing is small.</strong> 500 NOID, about a hundred and forty dollars at current prices, covers a collapse and nothing else.</li>
+    <li><strong>Chain risk.</strong> Native assets are five weeks old at launch. Consensus bugs, RPC quirks and wallet tooling are all live risks in a way that a decade-old chain's are not.</li>
+    <li><strong>Meme risk.</strong> There is no cash flow, no product and no claim on anything. If nobody laughs, the price is the backing and no more.</li>
+  </ul>
+
+  <h2 id="verify">10. How to verify all of this</h2>
+  <p>Nothing in this document needs to be taken on faith:</p>
+  <ul>
+    <li>The metadata hash is committed on chain — read the token record and hash the JSON behind this site yourself.</li>
+    <li>Backing, supply and the absence of a mint are consensus rules of <code class="mono">create_token</code>, not policy.</li>
+    <li>Curve cash follows the formula above; the wallet preview exposes the exact debit, fee and quoted output before any signature.</li>
+    <li>Every team address is on the disclosure page and every trade from them is a public transaction on a public chain.</li>
+  </ul>
+
+  <hr>
+  <p class="signoff">&mdash; always watching.</p>
+  <p class="meta">Not financial advice. Published parameters are protocol values read from a v2.1 node; price figures use the market rate at time of writing.</p>
+</main>
+
+<footer class="footer">
+  <img src="assets/logo.webp" alt="" width="56" height="56" loading="lazy">
+  <p class="warn">Beware of fakes. The only real contract address will be posted on the home page and on <a href="https://x.com/no1dcat" target="_blank" rel="noopener">@no1dcat</a>.</p>
+  <p class="disclaimer">Not financial advice. Meme token with no intrinsic value or expectation of returns.</p>
+  <p class="small"><a href="/">Home</a> &middot; <a href="disclosure.html">Disclosure</a> &middot; Contact: <a href="mailto:hello@noidcat.com">hello@noidcat.com</a></p>
+  <p class="small">&copy; 2026 NoidCat. always watching.</p>
+</footer>
+</body>
+</html>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Disclosure | $NOIDCAT</title>
-<meta name="description" content="$NOIDCAT disclosure: every wallet, the buy plan, and the sell rule, published before the token exists.">
+<meta name="description" content="$NOIDCAT disclosure: every wallet, the buy plan, the market-making policy and the sell ladder, published before the token exists.">
 <meta name="theme-color" content="#000000">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://noidcat.com/disclosure.html">
@@ -17,64 +17,113 @@
 <a class="skip" href="#wallets">Skip to content</a>
 
 <header class="nav">
-  <a class="brand" href="/"><img src="assets/logo.webp" alt="" width="32" height="32">$NOIDCAT</a>
+  <a class="brand" href="/"><img src="assets/logo.webp" alt="" width="32" height="32"><span class="lbl">$NOIDCAT</span></a>
   <nav aria-label="Sections">
-    <a href="/">Home</a><a href="#wallets">Wallets</a><a href="#plan">Buy plan</a><a href="#exit">Sell rule</a>
+    <a href="/">Home</a><a href="whitepaper.html">Whitepaper</a><a href="#wallets">Wallets</a><a href="#plan">Buy plan</a><a href="#exit">Sell ladder</a>
   </nav>
 </header>
 
-<main>
-  <section class="section">
-    <h2><span class="kicker">00 /</span> Disclosure</h2>
-    <p class="lead">This page exists before the token does. Every wallet used by the team is listed here, the buy plan is written out, and the sell rule is fixed in advance — so there is nothing to guess at after the fact.</p>
-    <p class="proof"><span class="one">①</span> Parano1d v2.1 has no lock contracts and no vesting. The commitment below is behavioural, not enforced by code. What makes it checkable is that the addresses are public and the rules were published before launch.</p>
-  </section>
+<main class="doc">
+  <h1>Disclosure</h1>
+  <p class="meta">Published before the token exists &middot; v2</p>
 
-  <section id="wallets" class="section">
-    <h2><span class="kicker">01 /</span> Wallets</h2>
-    <div class="alloc">
-      <article class="card"><div class="pct">Dev</div><h3>Creation + team bag</h3><p>Creates the token, pays the 500 NOID backing and buys the 14,000 token team bag in the same transaction.</p><p class="addr"><code>o10zz7h75swlpe2v2anpdrj5zvkrvedyvkulfr8mm6we8amn3q2k9sdjj2f2</code></p></article>
-      <article class="card"><div class="pct">Buy</div><h3>Follow-on buys</h3><p>Separate wallet so the buys are visible as their own wallet, not folded into the creator. Schedule below.</p><p class="addr"><code>o17hfku3n0q0lgkya4z9jd229z6mky9acpynxck5lj4udltyex8a6sa2452r</code></p></article>
-      <article class="card"><div class="pct">Hold</div><h3>Personal NOID</h3><p>Personal funds, may be moved at any time. Not part of the launch plan.</p><p class="addr"><code>o1wmazrn6qhcgvcj6xn3xvsc5neps46cjx33szg7a8adju0uznmr2s0k3cye</code></p></article>
-    </div>
-    <p class="proof">All three are addresses in one locally-run wallet on a self-hosted node. The token contract address will be posted on the home page at launch and nowhere else first.</p>
-  </section>
+  <p class="lead">Nothing here is a promise about price. It is a list of the wallets the team controls, what each one is allowed to do, and the rules the automation follows — written down before launch so there is nothing to guess at afterwards.</p>
 
-  <section id="plan" class="section">
-    <h2><span class="kicker">02 /</span> Buy plan</h2>
-    <div class="stats">
-      <div class="stat"><span class="label">Creation buy</span><span class="val">14,000</span><span class="hint">tokens, paid at curve price (~48.8 NOID)</span></div>
-      <div class="stat"><span class="label">Follow-on buys</span><span class="val">50 NOID</span><span class="hint">spread over 10–15 buys, not one block</span></div>
-      <div class="stat"><span class="label">Spacing</span><span class="val">5–7 blocks</span><span class="hint">1–4 NOID each, randomized</span></div>
-      <div class="stat"><span class="label">Cap</span><span class="val">45 NOID</span><span class="hint">hard stop on the buy wallet</span></div>
-    </div>
-    <p class="lead">There is no creation-block bundle: the token is created once, on its own, at the first block native tokens are usable. Follow-on buys start after creation confirms and are paced so the price path is visible rather than a single jump.</p>
-    <p class="proof">Buy wallet holds 50 NOID. Leftover NOID after the plan stays in that wallet and is visible on-chain.</p>
-  </section>
+  <p class="note"><strong>Read this first.</strong> Parano1d v2.1 has no lock contracts and no vesting. Nothing below is enforced by code. What makes it checkable is that every address is public from the creation block and every rule was published in advance. If a rule changes, the change is posted here and on <a href="https://x.com/no1dcat" target="_blank" rel="noopener">@no1dcat</a> before it takes effect.</p>
 
-  <section id="exit" class="section">
-    <h2><span class="kicker">03 /</span> Sell rule</h2>
-    <ol class="steps">
-      <li><span class="n">1</span><div><h3>First sell: 10% of the team bag</h3><p>Only once the price holds at or above <strong>0.006 NOID</strong> per token for 40 consecutive blocks. No selling into a flat or falling curve.</p></div></li>
-      <li><span class="n">2</span><div><h3>Then 10% every 120 blocks</h3><p>Same rule repeats while the price holds, up to three more steps.</p></div></li>
-      <li><span class="n">3</span><div><h3>Keep 40%</h3><p>The dev wallet never sells below 40% of the team bag. Sells go through the public curve, so they move the same price everyone else sees.</p></div></li>
+  <nav class="toc" aria-label="Contents">
+    <strong>Contents</strong>
+    <ol>
+      <li><a href="#wallets">Wallet list</a></li>
+      <li><a href="#plan">Buy plan and market making</a></li>
+      <li><a href="#exit">Sell ladder</a></li>
+      <li><a href="#honest">What this is not</a></li>
     </ol>
-    <p class="proof"><span class="one">①</span> Rule is mechanical, not vibes: threshold, hold window and step size are fixed here before launch. If it is ever changed, the change goes on this page and on <a href="https://x.com/no1dcat" target="_blank" rel="noopener">@no1dcat</a>.</p>
-  </section>
+  </nav>
 
-  <section class="section">
-    <h2><span class="kicker">04 /</span> What this is not</h2>
-    <p class="lead">A meme token. No roadmap promises, no treasury, no unlock schedule to monitor, no marketing budget denominated in anything. 500 NOID of backing sits under the supply and is redeemable by burning tokens; everything above that is whatever the market pays.</p>
-    <p class="proof">Supply 500,000 &middot; 60% curve &middot; 40% permanent DEX liquidity on graduation &middot; contract address TBA at the creation block.</p>
-  </section>
+  <h2 id="wallets">1. Wallet list</h2>
+  <p>Every wallet the team uses is listed below with its job. All of them derive from one seed held on one self-hosted node. They are separate addresses so each role is visible on its own rather than folded into a single opaque creator wallet.</p>
+
+  <h3>Dev &mdash; creates the token, holds the team bag</h3>
+  <p>Pays the 500 NOID holder backing, executes the 25,000 token creation buy, and accumulates toward the team target. This is the only wallet that ever sells into the ladder.</p>
+  <div class="copyrow"><code data-copy>o10zz7h75swlpe2v2anpdrj5zvkrvedyvkulfr8mm6we8amn3q2k9sdjj2f2</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
+
+  <h3>Market makers &mdash; six addresses, indices 3&ndash;8</h3>
+  <p>These make the two-sided market described in section 3. They are team wallets, not organic buyers, and the candles they produce are team candles. Each one runs an independent schedule with its own size range and timing so the tape does not look like a metronome.</p>
+  <div class="copyrow"><code data-copy>o17hfku3n0q0lgkya4z9jd229z6mky9acpynxck5lj4udltyex8a6sa2452r</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
+  <div class="copyrow"><code data-copy>o1acy95grvuql6kkpj84yx2l5xz5wwlg866u5wws0z5g7g34aelsaqxjrz6p</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
+  <div class="copyrow"><code data-copy>o1hygn6ssvku6tl3xgu2z9yztlykj2wvhcfh537t3pcycn3gx9lfdsxtxud0</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
+  <div class="copyrow"><code data-copy>o1u8z9tqk456g37l0gkturcz43n5ddme073x24ugxkufxrn6ly835s5rulwj</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
+  <div class="copyrow"><code data-copy>o1rzdgavlhdytlysny50v7land0klumpeflvutevuarerppcsea93q58dute</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
+  <div class="copyrow"><code data-copy>o1fu8k4350qh85uesy7sd9a3qsck3uye40ysqcn04fjaa9ff5z96xsn47k3j</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
+
+  <h3>Personal &mdash; not part of the plan</h3>
+  <p>Drew's own NOID. It can move at any time and is not counted in any figure on this page.</p>
+  <div class="copyrow"><code data-copy>o1wmazrn6qhcgvcj6xn3xvsc5neps46cjx33szg7a8adju0uznmr2s0k3cye</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
+
+  <h2 id="plan">2. Buy plan and market making</h2>
+  <p>The token is created at the first block where v2.1 native operations are live, block <strong>279,370</strong>, with a creation buy in the same transaction. There is no multi-wallet bundle in the creation block: one wallet, one transaction, one address in the block.</p>
+
+  <ul>
+    <li><strong>Creation buy: 25,000 tokens</strong> (5% of supply), paid at curve price, about 90 NOID. This sets the opening price and starts the chart.</li>
+    <li><strong>Team target: 100,000 tokens</strong> (20% of supply), reached by accumulation on the public curve over the first hours — not in one block.</li>
+    <li><strong>Hard cap: 22%.</strong> Past that, the dev wallet stops buying regardless of price.</li>
+    <li><strong>Market making runs on six addresses</strong> from the confirmation block onward. Buy, hold for a short window, sell most of the position back into the curve, repeat. Positions are never sold below their own entry price, so the two-sided trading is not supposed to bleed.</li>
+    <li><strong>Demand following.</strong> If the price moves more than 1.5% in a block without a team buy in it, the dev wallet buys within the next block instead of waiting its turn. Real buying is never allowed to outrun the accumulation.</li>
+  </ul>
+
+  <p class="note">The honest summary: the early volume is largely ours. Six addresses plus the dev wallet are trading a curve nobody else has found yet. What that buys you is a live chart and a price that does not sit flat, not an illusion that a crowd has arrived.</p>
+
+  <h2 id="exit">3. Sell ladder</h2>
+  <p>The dev wallet is the only seller, and it sells on a fixed ladder measured against its own average entry price. Nothing is sold below that average.</p>
+  <table>
+    <thead><tr><th>Rung</th><th>Trigger</th><th>Size</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>2&times; average cost</td><td>8% of bag</td></tr>
+      <tr><td>2</td><td>3&times; average cost</td><td>8% of bag</td></tr>
+      <tr><td>3</td><td>5&times; average cost</td><td>8% of bag</td></tr>
+      <tr><td>4</td><td>8&times; average cost</td><td>8% of bag</td></tr>
+    </tbody>
+  </table>
+  <ul>
+    <li><strong>Spacing:</strong> at least 120 blocks between rungs, so a single candle cannot trigger two sales.</li>
+    <li><strong>Floor:</strong> the dev wallet keeps at least 25% of the bag through graduation and into the DEX pool.</li>
+    <li><strong>Path:</strong> every sale goes through the public curve or pool at the same price everyone else sees. No off-market transfers to buyers.</li>
+    <li><strong>Sells are not hidden.</strong> The bag sits in a disclosed address; anyone can watch it move.</li>
+  </ul>
+
+  <h2 id="honest">4. What this is not</h2>
+  <ul>
+    <li>Not enforced by vesting. The ladder is the declared behaviour of a script, not a contract lock.</li>
+    <li>Not a presale and not an allowlist. There is no allocation to buy and no wallet that gets in early.</li>
+    <li>Not a treasury or a roadmap. There is no marketing wallet denominated in anything, and the team allocation exists to pay for hosting, art and liquidity.</li>
+    <li>Not a claim about price. At launch prices the whole team bag is worth about a hundred dollars. Everything above that is whatever buyers decide.</li>
+  </ul>
+
+  <hr>
+  <p><strong>Backing and supply.</strong> Supply is fixed at 500,000 with no mint. Backing is 0.001 NOID per token — 500 NOID in total — deposited at creation, attached permanently to the supply, redeemable by any holder who burns tokens. It is a floor, not a vault. The dev wallet can never withdraw it.</p>
+  <p class="signoff">&mdash; always watching.</p>
+  <p class="meta">Full mechanics, formulas and economics: <a href="whitepaper.html">whitepaper</a>.</p>
 </main>
 
 <footer class="footer">
   <img src="assets/logo.webp" alt="" width="56" height="56" loading="lazy">
-  <p class="warn">Beware of fakes. The only real CA will be posted here and on <a href="https://x.com/no1dcat" target="_blank" rel="noopener">@no1dcat</a>.</p>
+  <p class="warn">Beware of fakes. The only real contract address will be posted on the home page and on <a href="https://x.com/no1dcat" target="_blank" rel="noopener">@no1dcat</a>.</p>
   <p class="disclaimer">Not financial advice. Meme token with no intrinsic value or expectation of returns.</p>
-  <p class="small"><a href="/">Home</a> &middot; Contact: <a href="mailto:hello@noidcat.com">hello@noidcat.com</a></p>
+  <p class="small"><a href="/">Home</a> &middot; <a href="whitepaper.html">Whitepaper</a> &middot; Contact: <a href="mailto:hello@noidcat.com">hello@noidcat.com</a></p>
   <p class="small">&copy; 2026 NoidCat. always watching.</p>
 </footer>
+
+<script>
+document.querySelectorAll('[data-copy-btn]').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var t = b.previousElementSibling.textContent.trim();
+    navigator.clipboard.writeText(t).then(function () {
+      b.textContent = 'Copied'; b.classList.add('ok');
+      setTimeout(function () { b.textContent = 'Copy'; b.classList.remove('ok'); }, 1400);
+    });
+  });
+});
+</script>
 </body>
 </html>
