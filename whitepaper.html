@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Whitepaper | $NOIDCAT</title>
-<meta name="description" content="$NOIDCAT whitepaper: a native token on Parano1d v2.1 — curve mechanics, backing, graduation, allocation and market policy, with the maths written out.">
+<meta name="description" content="$NOIDCAT whitepaper: a native token on Parano1d v2.1 — curve mechanics, backing, graduation, allocation and exit policy, with the maths written out.">
 <meta name="theme-color" content="#000000">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://noidcat.com/whitepaper.html">
@@ -19,7 +19,7 @@
 <header class="nav">
   <a class="brand" href="/"><img src="assets/logo.webp" alt="" width="32" height="32"><span class="lbl">$NOIDCAT</span></a>
   <nav aria-label="Sections">
-    <a href="/">Home</a><a href="disclosure.html">Disclosure</a><a href="#curve">Curve</a><a href="#market">Market policy</a><a href="#risk">Risks</a>
+    <a href="/">Home</a><a href="disclosure.html">Disclosure</a><a href="#curve">Curve</a><a href="#market">Trading</a><a href="#risk">Risks</a>
   </nav>
 </header>
 
@@ -39,7 +39,7 @@
       <li><a href="#backing">Backing and redemption</a></li>
       <li><a href="#graduation">Graduation and the pool</a></li>
       <li><a href="#allocation">Allocation</a></li>
-      <li><a href="#market">Market policy</a></li>
+      <li><a href="#market">Trading and exit</a></li>
       <li><a href="#risk">Risk and threat model</a></li>
       <li><a href="#verify">How to verify all of this</a></li>
     </ol>
@@ -111,10 +111,10 @@
   </table>
   <p>Team tokens are not free tokens. They are bought at curve price with NOID the team spent, and they dilute nobody because supply is fixed. 22% is the ceiling; it is reached only if the price stays below the accumulation ceiling while the bag fills.</p>
 
-  <h2 id="market">8. Market policy</h2>
+  <h2 id="market">8. Trading and exit policy</h2>
   <p>Two mechanisms run from the confirmation block. Both are published here and enforced by script, not by discretion at two in the morning.</p>
-  <h3>Two-sided market making</h3>
-  <p>Six disclosed addresses cycle small positions against each other with independent timing, size ranges and hold windows. Each position sells back into the curve above its own entry price, so the cycle is a ratchet rather than a subsidy. The purpose is a live tape on a venue with no order book and, at launch, no audience.</p>
+  <h3>Six trading wallets</h3>
+  <p>Six published addresses trade small positions on their own timing and sizes, each selling back above its own entry price, so the cycle ratchets rather than bleeds. The point is a chart that is alive from the first hour on a venue with no order book and, at launch, no audience.</p>
   <h3>Demand following</h3>
   <p>When a block moves the price more than 150 basis points without a team buy in it, the dev wallet buys in the following block. The accumulation is not allowed to be outrun by real flow: if buyers arrive, the bag fills faster and the price is defended by our own participation rather than by hope.</p>
   <h3>Exit</h3>
@@ -124,7 +124,7 @@
   <p>What can go wrong, stated plainly:</p>
   <ul>
     <li><strong>Liquidity is thin until graduation.</strong> 2,000 NOID is the entire curve. A 20 NOID sell moves price several percent. Position sizes matter more here than on a deep venue.</li>
-    <li><strong>The team is the early market.</strong> Early candles are mostly ours. A reader who assumes organic discovery on day one is being flattered.</li>
+    <li><strong>The team trades early.</strong> Early candles are mostly ours, so read the first hours as a starting price rather than a crowd.</li>
     <li><strong>Graduation is not permanent liquidity magic.</strong> The pool can be drained by sellers; the 40% becomes the only depth.</li>
     <li><strong>No vesting and no lock.</strong> The ladder is declared behaviour. A compromised key or a changed rule breaks it, and the only recourse is the published address list.</li>
     <li><strong>Backing is small.</strong> 500 NOID, about a hundred and forty dollars at current prices, covers a collapse and nothing else.</li>

@@ -48,8 +48,8 @@
   <p>Pays the 500 NOID holder backing, executes the 25,000 token creation buy, and accumulates toward the team target. This is the only wallet that ever sells into the ladder.</p>
   <div class="copyrow"><code data-copy>o10zz7h75swlpe2v2anpdrj5zvkrvedyvkulfr8mm6we8amn3q2k9sdjj2f2</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
 
-  <h3>Market makers &mdash; six addresses, indices 3&ndash;8</h3>
-  <p>These make the two-sided market described in section 3. They are team wallets, not organic buyers, and the candles they produce are team candles. Each one runs an independent schedule with its own size range and timing so the tape does not look like a metronome.</p>
+  <h3>Six small wallets</h3>
+  <p>Funded from the dev wallet, these trade small amounts on the public curve. Same seed, separate addresses, so the activity can be followed one wallet at a time.</p>
   <div class="copyrow"><code data-copy>o17hfku3n0q0lgkya4z9jd229z6mky9acpynxck5lj4udltyex8a6sa2452r</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
   <div class="copyrow"><code data-copy>o1acy95grvuql6kkpj84yx2l5xz5wwlg866u5wws0z5g7g34aelsaqxjrz6p</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
   <div class="copyrow"><code data-copy>o1hygn6ssvku6tl3xgu2z9yztlykj2wvhcfh537t3pcycn3gx9lfdsxtxud0</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
@@ -61,18 +61,18 @@
   <p>Drew's own NOID. It can move at any time and is not counted in any figure on this page.</p>
   <div class="copyrow"><code data-copy>o1wmazrn6qhcgvcj6xn3xvsc5neps46cjx33szg7a8adju0uznmr2s0k3cye</code><button class="copybtn" type="button" data-copy-btn>Copy</button></div>
 
-  <h2 id="plan">2. Buy plan and market making</h2>
+  <h2 id="plan">2. Buy plan</h2>
   <p>The token is created at the first block where v2.1 native operations are live, block <strong>279,370</strong>, with a creation buy in the same transaction. There is no multi-wallet bundle in the creation block: one wallet, one transaction, one address in the block.</p>
 
   <ul>
     <li><strong>Creation buy: 25,000 tokens</strong> (5% of supply), paid at curve price, about 90 NOID. This sets the opening price and starts the chart.</li>
     <li><strong>Team target: 100,000 tokens</strong> (20% of supply), reached by accumulation on the public curve over the first hours — not in one block.</li>
     <li><strong>Hard cap: 22%.</strong> Past that, the dev wallet stops buying regardless of price.</li>
-    <li><strong>Market making runs on six addresses</strong> from the confirmation block onward. Buy, hold for a short window, sell most of the position back into the curve, repeat. Positions are never sold below their own entry price, so the two-sided trading is not supposed to bleed.</li>
+    <li><strong>Six wallets trade from the confirmation block onward.</strong> Small buys, short holds, most of the position sold back into the curve and never below its own entry price. It keeps the early chart moving instead of one address talking to itself.</li>
     <li><strong>Demand following.</strong> If the price moves more than 1.5% in a block without a team buy in it, the dev wallet buys within the next block instead of waiting its turn. Real buying is never allowed to outrun the accumulation.</li>
   </ul>
 
-  <p class="note">The honest summary: the early volume is largely ours. Six addresses plus the dev wallet are trading a curve nobody else has found yet. What that buys you is a live chart and a price that does not sit flat, not an illusion that a crowd has arrived.</p>
+  <p class="note">Early hours on a chart are mostly the people who built it, and this launch is no exception. What is fixed in advance is the ceiling: the team never holds more than 22%, sells only above its own average cost, and every address doing it sits on this page.</p>
 
   <h2 id="exit">3. Sell ladder</h2>
   <p>The dev wallet is the only seller, and it sells on a fixed ladder measured against its own average entry price. Nothing is sold below that average.</p>
